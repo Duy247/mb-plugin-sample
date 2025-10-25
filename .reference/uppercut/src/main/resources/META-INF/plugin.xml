@@ -1,0 +1,36 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <id>com.rankweis</id>
+  <name>uppercut</name>
+  <vendor>rankweis</vendor>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.java</depends>
+  <depends>gherkin</depends>
+
+  <resource-bundle>messages.MyBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.intellij">
+
+    <!-- Use Gherkin language from the official Gherkin plugin for .feature files -->
+
+    <!-- TEST EXECUTION AND RUN CONFIGURATION FEATURES -->
+    <runLineMarkerContributor id="cucumberRunLineMarkerContributer" language="Gherkin"
+      implementationClass="com.rankweis.uppercut.karate.run.CucumberRunLineMarkerContributor"/>
+    <runConfigurationProducer
+      implementation="com.rankweis.uppercut.karate.run.KarateRunConfigurationProducer"/>
+    <configurationType
+      implementation="com.rankweis.uppercut.karate.run.KarateConfigurationType"/>
+
+    <!-- Settings needed for run configurations -->
+    <projectConfigurable
+      parentId="tools"
+      instance="com.rankweis.uppercut.settings.UppercutSettingsConfigurable"
+      id="com.rankweis.ProjectSettingsConfigurable"
+      displayName="Karate"
+      nonDefaultProject="true"/>
+
+  </extensions>
+
+
+</idea-plugin>
